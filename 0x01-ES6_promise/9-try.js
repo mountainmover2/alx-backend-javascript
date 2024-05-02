@@ -1,7 +1,13 @@
-export default function divideFunction(numerator, denominator) {
-  if (denominator === 0) {
-    throw new Error('cannot divide by 0');
+export default function guardrail(mathFunction) {
+  const queue = [];
+
+  try {
+    queue.push(mathFunction());
+  } catch (err) {
+    queue.push(String(err));
+  } finally {
+    queue.push('Guardrail was processed');
   }
 
-  return numerator / denominator;
+  return queue;
 }
